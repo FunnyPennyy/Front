@@ -18,7 +18,7 @@ const dummyTransactions1 = [
   },
   {
     date: "2024-01-03",
-    description: "예급 만기해지",
+    description: "예금 만기해지",
     amount: 300000,
     balance: 2938000,
   },
