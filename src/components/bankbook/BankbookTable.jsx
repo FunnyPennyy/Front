@@ -86,7 +86,7 @@ export default function BankbookTable() {
 
 const Container = styled.div`
   padding: 1rem 7rem;
-  margin-top: 9rem;
+  margin-top: 1rem;
 `;
 
 const Section = styled.div`
