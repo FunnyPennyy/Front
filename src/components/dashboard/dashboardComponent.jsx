@@ -2,6 +2,7 @@ import React from "react";
 import "../../styles/dashboard/dashboard.css";
 import "../../styles/dashboard/notice.css";
 import "../../styles/dashboard/finance.css";
+import "../../styles/dashboard/chart.css";
 
 const dashboardComponent = () => {
   return (
@@ -73,7 +74,9 @@ const dashboardComponent = () => {
           </ul>
         </div>
         <div className="chart-section">
-          <h3>주식추이</h3>
+          <div class="chart-header">
+            <h3>주식추이</h3>
+          </div>
         </div>
       </div>
     </div>

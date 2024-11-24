@@ -1,0 +1,10 @@
+.notice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  margin: 0.2rem 1rem;
+}
+.notice-header h3 {
+  margin: 0.8rem 0rem;
+}
