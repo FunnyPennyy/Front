@@ -4,6 +4,7 @@ import BankbookPage from "./pages/bankbook/bankbook";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Mypage from "./pages/mypage/Mypage";
 import Layout from "./components/Layout";
+import Todo from "./pages/todo/Todo";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         {/* Header가 필요한 페이지들 */}
         <Route element={<Layout />}>
           <Route path="/bankbook" element={<BankbookPage />} />
+          <Route path="/todo" element={<Todo />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/mypage" element={<Mypage />} />
         </Route>
