@@ -73,9 +73,10 @@ const TransactionTable = ({ transactions }) => (
 export default function BankbookTable() {
   return (
     <Container>
-      <BankbookName userName="멋사" />
-      <TransactionTable transactions={dummyTransactions1} />
-
+      <FirstSection>
+        <BankbookName userName="멋사" />
+        <TransactionTable transactions={dummyTransactions1} />
+      </FirstSection>
       <Section>
         <BankbookName userName="멋사" type="savings" />
         <TransactionTable transactions={dummyTransactions2} />
@@ -88,19 +89,26 @@ const Container = styled.div`
   padding: 1rem 7rem;
   margin-top: 1rem;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Section = styled.div`
-  margin-top: 3.5rem;
+  margin-top: 2.7rem;
+  width: 80%;
+`;
+
+const FirstSection = styled(Section)`
+  margin-top: -0.5rem;
 `;
 
 const TableWrapper = styled.div`
   overflow-x: auto;
+  width: 100%;
 `;
 
 const Table = styled.table`
-  width: 90%;
+  width: 100%;
   background-color: white;
   border-collapse: collapse;
 `;
