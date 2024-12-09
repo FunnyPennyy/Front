@@ -18,7 +18,7 @@ const dummyTransactions1 = [
   },
   {
     date: "2024-01-03",
-    description: "예급 만기해지",
+    description: "예금 만기해지",
     amount: 300000,
     balance: 2938000,
   },
@@ -87,6 +87,8 @@ export default function BankbookTable() {
 const Container = styled.div`
   padding: 1rem 7rem;
   margin-top: 1rem;
+  display: flex;
+  justify-content: center;
 `;
 
 const Section = styled.div`
@@ -98,13 +100,14 @@ const TableWrapper = styled.div`
 `;
 
 const Table = styled.table`
-  width: 100%;
+  width: 90%;
   background-color: white;
   border-collapse: collapse;
 `;
 
 const Thead = styled.thead`
-  background-color: #f3f4f6;
+  border-radius: 10px;
+  background-color: #f2f2f2;
 `;
 
 const Th = styled.th`
