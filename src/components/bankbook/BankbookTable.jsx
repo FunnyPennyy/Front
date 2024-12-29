@@ -18,7 +18,7 @@ const dummyTransactions1 = [
   },
   {
     date: "2024-01-03",
-    description: "예급 만기해지",
+    description: "예금 만기해지",
     amount: 300000,
     balance: 2938000,
   },
@@ -73,9 +73,10 @@ const TransactionTable = ({ transactions }) => (
 export default function BankbookTable() {
   return (
     <Container>
-      <BankbookName userName="멋사" />
-      <TransactionTable transactions={dummyTransactions1} />
-
+      <FirstSection>
+        <BankbookName userName="멋사" />
+        <TransactionTable transactions={dummyTransactions1} />
+      </FirstSection>
       <Section>
         <BankbookName userName="멋사" type="savings" />
         <TransactionTable transactions={dummyTransactions2} />
@@ -87,14 +88,23 @@ export default function BankbookTable() {
 const Container = styled.div`
   padding: 1rem 7rem;
   margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Section = styled.div`
-  margin-top: 3.5rem;
+  margin-top: 2.7rem;
+  width: 80%;
+`;
+
+const FirstSection = styled(Section)`
+  margin-top: -0.5rem;
 `;
 
 const TableWrapper = styled.div`
   overflow-x: auto;
+  width: 100%;
 `;
 
 const Table = styled.table`
@@ -104,7 +114,8 @@ const Table = styled.table`
 `;
 
 const Thead = styled.thead`
-  background-color: #f3f4f6;
+  border-radius: 10px;
+  background-color: #f2f2f2;
 `;
 
 const Th = styled.th`
