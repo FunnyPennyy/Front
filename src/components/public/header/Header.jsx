@@ -5,16 +5,16 @@ const Header = () => {
   return (
     <header>
       <div class="logo-div">
-        <a href="/dashboard" id="funnypenny-logo-red">
+        <a href="/" id="funnypenny-logo-red">
           퍼니<span id="funnypenny-logo-green">페니</span>
         </a>
       </div>
       <div>
         <nav class="header-nav">
           <ul>
-            <a href="/dashboard" class="header-nav-li-onclick">
+            <a href="/" class="header-nav-li-onclick">
               <img src="/img/header/file.png" alt="dashboard file img" />
-              <p href="/dashboard">대시보드</p>
+              <p href="/">대시보드</p>
             </a>
             <a href="/todo" class="header-nav-li">
               <img src="/img/header/calendar.png" alt="calendar img" />
