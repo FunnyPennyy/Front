@@ -1,9 +1,10 @@
 import React from "react";
+import MypageComponent from "../../components/mypage/MypageComponent";
 
 const Mypage = () => {
   return (
-    <div id="dashboard">
-      <h1>Mypage</h1>
+    <div id="mypage">
+      <MypageComponent />
     </div>
   );
 };
