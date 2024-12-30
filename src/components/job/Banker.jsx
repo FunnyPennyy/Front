@@ -179,7 +179,7 @@ const Container = styled.div`
 const Title = styled.h2`
   margin-bottom: 1rem;
   margin-top: 0rem;
-  font-size: 1.5rem;
+  font-size: 1rem;
   color: #333;
 `;
 
@@ -193,7 +193,7 @@ const Th = styled.th`
   padding: 0.5rem;
   background-color: #f0f0f0;
   border: 1px solid #ddd;
-  font-size: 1rem;
+  font-size: 0.95rem;
   text-align: center;
 `;
 
@@ -216,7 +216,7 @@ const ThActions = styled(Th)`
 const Td = styled.td`
   padding: 0.5rem;
   border: 1px solid #ddd;
-  font-size: 1rem;
+  font-size: 0.9rem;
   text-align: center;
 `;
 
@@ -241,7 +241,7 @@ const ActionButton = styled.button`
     props.disabled ? "#ddd" : "rgb(238, 87, 87)"};
   color: white;
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.8rem;
   border-radius: 0.25rem;
   cursor: pointer;
 
