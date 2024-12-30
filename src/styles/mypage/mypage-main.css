@@ -1,0 +1,118 @@
+/* 기본 컨테이너 스타일 */
+.mypage-container {
+  font-family: Arial, sans-serif;
+  padding: 3rem 5rem;
+  width: 100vw;
+  background-color: #f9f9f9;
+}
+
+/* 직업 카드 스타일 */
+.job-card {
+  display: flex;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 2rem 2rem;
+  margin-bottom: 3rem;
+}
+
+.job-image {
+  width: 30%;
+  height: auto;
+  background-color: #eaeaea;
+  border-radius: 8px;
+  margin-right: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.job-info h2 {
+  font-size: 1.5rem;
+  margin: 0;
+  margin-top: 1.2rem;
+  margin-bottom: 1.5rem;
+
+  color: #000;
+  font-family: NanumSquareRound;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  letter-spacing: -0.06563rem;
+}
+
+.job-info .edit-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  color: var(--text-lightgre, #afafaf);
+  font-family: NanumSquareRound;
+  font-size: 0.7rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.02813rem;
+}
+
+.job-info .school-info,
+.job-info .total-asset,
+.job-info .credit-grade {
+  margin: 1rem 0rem;
+
+  color: var(--text, #3c3530);
+  font-family: NanumSquareRound;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  letter-spacing: -0.0375rem;
+}
+
+.job-info .credit-grade-n {
+  color: red;
+  font-weight: bold;
+}
+
+/* 내 자산 섹션 */
+
+.asset-section h3,
+.certificate-section h3 {
+  color: #000;
+  font-family: NanumSquareRound;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  letter-spacing: -0.05063rem;
+}
+.asset-section,
+.certificate-section {
+  margin-bottom: 2rem;
+}
+
+.asset-items,
+.certificate-items {
+  display: flex;
+  gap: 20px;
+}
+
+.asset-item,
+.certificate-item {
+  flex: 1;
+  height: 10rem;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.stock-link {
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+}
