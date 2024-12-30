@@ -18,7 +18,7 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/bankbook" element={<BankbookPage />} />
           <Route path="/todo" element={<Todo />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/mypage" element={<Mypage />} />
         </Route>
       </Routes>

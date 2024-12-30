@@ -153,7 +153,7 @@ const Todolist = ({ selectedDate, userJob }) => {
   useEffect(() => {
     const fetchDefaultTodos = async () => {
       try {
-        const response = await axios.post("/api/todos/default", {
+        const response = await axios.post(`/todo/1`, {
           date: currentDateKey,
           job: userJob, // 사용자 직업 전달
         });
