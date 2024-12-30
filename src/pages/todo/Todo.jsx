@@ -16,7 +16,8 @@ const Todo = () => {
           <CustomCalendar onChange={setSelectedDate} value={selectedDate} />
           {/* Todolist 컴포넌트 */}
           <TodolistWrapper>
-            <Todolist selectedDate={selectedDate} />
+            <Todolist selectedDate={selectedDate} userJob={userJob} />{" "}
+            {/* userJob 전달 */}
           </TodolistWrapper>
         </CalendarAndListContainer>
       </PageContainer>

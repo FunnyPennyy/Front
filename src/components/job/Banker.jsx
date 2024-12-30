@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 const Banker = () => {
   const [students, setStudents] = useState([
@@ -37,24 +38,45 @@ const Banker = () => {
     setWithdrawAmount("");
   };
 
-  const createAccount = () => {
-    if (selectedStudent) {
-      setStudents((prev) =>
-        prev.map((student) =>
-          student.id === selectedStudent.id
-            ? {
-                ...student,
-                hasAccount: true,
-                depositInfo: {
-                  amount: parseInt(depositAmount),
-                  period: parseInt(depositPeriod),
-                  createdAt: new Date(),
-                },
-              }
-            : student
-        )
-      );
-      closeModal();
+  const createAccount = async () => {
+    if (!selectedStudent || !depositAmount || !depositPeriod) {
+      alert("모든 값을 입력해주세요.");
+      return;
+    }
+
+    try {
+      // 예금통장 생성 API 호출
+      const response = await axios.post("/deposit", {
+        ownerId: selectedStudent.id, // 선택된 학생의 ID
+        depositTypeId: "2", // 예금 유형 ID (예: "2"로 고정)
+        amount: parseInt(depositAmount), // 예금 금액
+      });
+
+      if (response.status === 200) {
+        // API 응답 데이터를 사용하여 상태 업데이트
+        const data = response.data;
+        alert("계좌가 성공적으로 생성되었습니다.");
+
+        setStudents((prev) =>
+          prev.map((student) =>
+            student.id === selectedStudent.id
+              ? {
+                  ...student,
+                  hasAccount: true,
+                  depositInfo: {
+                    amount: data.amount,
+                    period: depositPeriod, // 사용자가 입력한 기간
+                    createdAt: data.createdDate, // API 응답에서 생성일
+                  },
+                }
+              : student
+          )
+        );
+        closeModal();
+      }
+    } catch (error) {
+      console.error("계좌 생성 중 오류 발생:", error);
+      alert("계좌 생성에 실패했습니다.");
     }
   };
 

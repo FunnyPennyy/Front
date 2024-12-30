@@ -1,5 +1,143 @@
+// import React, { useState, useEffect } from "react";
+// import styled from "styled-components";
+// import axios from "axios";
+
+// const Todolist = ({ selectedDate, userJob }) => {
+//   const [tasksByDate, setTasksByDate] = useState({}); // 날짜별 할 일 관리
+//   const [newTask, setNewTask] = useState("");
+//   const [isEditing, setIsEditing] = useState(null); // 현재 수정 중인 할 일의 index
+//   const [editedTask, setEditedTask] = useState(""); // 수정 중인 내용
+
+//   // 선택된 날짜에 해당하는 할 일 목록 가져오기
+//   const currentDateKey = selectedDate.toISOString().split("T")[0]; // YYYY-MM-DD 형식
+//   const tasks = tasksByDate[currentDateKey] || []; // 선택된 날짜의 할 일 목록
+
+//   // 직업별 기본 할 일 설정
+//   useEffect(() => {
+//     const jobBasedTasks = {
+//       개발자: ["코드 리뷰", "React 학습", "GitLab 정리"],
+//       은행원: ["예적금 가입 도와주기", "이자율 확인하기"],
+//       마케터: ["마케팅 캠페인 작성", "분석 보고서 준비", "콘텐츠 기획"],
+//     };
+
+//     const defaultTasks = jobBasedTasks[userJob] || [
+//       "기본 할 일 1",
+//       "기본 할 일 2",
+//     ];
+
+//     // 초기 기본값 설정 (이미 있는 날짜에는 설정하지 않음)
+//     setTasksByDate((prev) => ({
+//       ...prev,
+//       [currentDateKey]: prev[currentDateKey] || defaultTasks,
+//     }));
+//   }, [userJob, currentDateKey]);
+
+//   const addTask = () => {
+//     if (newTask.trim() !== "") {
+//       setTasksByDate((prev) => ({
+//         ...prev,
+//         [currentDateKey]: [...(prev[currentDateKey] || []), newTask],
+//       }));
+//       setNewTask("");
+//     }
+//   };
+
+//   const deleteTask = (index) => {
+//     setTasksByDate((prev) => ({
+//       ...prev,
+//       [currentDateKey]: tasks.filter((_, i) => i !== index),
+//     }));
+//   };
+
+//   const startEditing = (index) => {
+//     setIsEditing(index); // 수정 모드로 변경
+//     setEditedTask(tasks[index]); // 기존 내용을 수정 상태로 설정
+//   };
+
+//   const saveEditedTask = async (index, contentId) => {
+//     const updatedTask = editedTask.trim();
+
+//     if (!updatedTask) {
+//       alert("수정할 내용이 비어있습니다.");
+//       return;
+//     }
+
+//     try {
+//       // API 호출
+//       const response = await axios.patch(`/api/todos/${contentId}`, {
+//         newContent: updatedTask,
+//       });
+
+//       if (response.status === 201) {
+//         // 응답이 성공적인 경우 로컬 상태 업데이트
+//         const updatedTasks = [...tasks];
+//         updatedTasks[index] = updatedTask; // 수정된 내용을 저장
+//         setTasksByDate((prev) => ({
+//           ...prev,
+//           [currentDateKey]: updatedTasks,
+//         }));
+//         setIsEditing(null); // 수정 모드 종료
+//         setEditedTask(""); // 수정 상태 초기화
+//       }
+//     } catch (error) {
+//       console.error("Todo 수정 실패:", error);
+//       alert("Todo를 수정하는 데 실패했습니다.");
+//     }
+//   };
+
+//   return (
+//     <TodolistContainer>
+//       {/* <Title>
+//         {new Intl.DateTimeFormat("ko-KR", {
+//           year: "numeric",
+//           month: "long",
+//           day: "numeric",
+//         }).format(selectedDate)}
+//         의 할 일
+//       </Title> */}
+
+//       <TaskInputContainer>
+//         <TaskInput
+//           type="text"
+//           value={newTask}
+//           placeholder="할 일을 입력하세요"
+//           onChange={(e) => setNewTask(e.target.value)}
+//         />
+//         <AddButton onClick={addTask}>추가</AddButton>
+//       </TaskInputContainer>
+//       <TaskList>
+//         {tasks.map((task, index) => (
+//           <TaskItem key={index}>
+//             <Checkbox type="checkbox" onChange={() => {}} />
+//             {isEditing === index ? (
+//               <EditInput
+//                 type="text"
+//                 value={editedTask}
+//                 onChange={(e) => setEditedTask(e.target.value)}
+//               />
+//             ) : (
+//               <TaskText>{task}</TaskText>
+//             )}
+//             {isEditing === index ? (
+//               <SaveButton onClick={() => saveEditedTask(index, task.contentId)}>
+//                 저장
+//               </SaveButton>
+//             ) : (
+//               <EditButton onClick={() => startEditing(index)}>수정</EditButton>
+//             )}
+//             <DeleteButton onClick={() => deleteTask(index)}>삭제</DeleteButton>
+//           </TaskItem>
+//         ))}
+//       </TaskList>
+//     </TodolistContainer>
+//   );
+// };
+
+// export default Todolist;
+
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 const Todolist = ({ selectedDate, userJob }) => {
   const [tasksByDate, setTasksByDate] = useState({}); // 날짜별 할 일 관리
@@ -11,36 +149,59 @@ const Todolist = ({ selectedDate, userJob }) => {
   const currentDateKey = selectedDate.toISOString().split("T")[0]; // YYYY-MM-DD 형식
   const tasks = tasksByDate[currentDateKey] || []; // 선택된 날짜의 할 일 목록
 
-  // 직업별 기본 할 일 설정
+  // Default Todo API를 통해 기본 Todo 가져오기
   useEffect(() => {
-    const jobBasedTasks = {
-      개발자: ["코드 리뷰", "React 학습", "GitLab 정리"],
-      디자이너: ["UI/UX 시안 제작", "피드백 반영", "Figma 정리"],
-      마케터: ["마케팅 캠페인 작성", "분석 보고서 준비", "콘텐츠 기획"],
+    const fetchDefaultTodos = async () => {
+      try {
+        const response = await axios.post("/api/todos/default", {
+          date: currentDateKey,
+          job: userJob, // 사용자 직업 전달
+        });
+        setTasksByDate((prev) => ({
+          ...prev,
+          [currentDateKey]: response.data.data, // Default Todos 데이터 업데이트
+        }));
+      } catch (error) {
+        console.error("기본 Todo를 불러오는 데 실패했습니다:", error);
+      }
     };
 
-    const defaultTasks = jobBasedTasks[userJob] || [
-      "기본 할 일 1",
-      "기본 할 일 2",
-    ];
+    fetchDefaultTodos();
+  }, [currentDateKey, userJob]);
 
-    // 초기 기본값 설정 (이미 있는 날짜에는 설정하지 않음)
-    setTasksByDate((prev) => ({
-      ...prev,
-      [currentDateKey]: prev[currentDateKey] || defaultTasks,
-    }));
-  }, [userJob, currentDateKey]);
+  const addTask = async () => {
+    const newTaskContent = newTask.trim();
 
-  const addTask = () => {
-    if (newTask.trim() !== "") {
-      setTasksByDate((prev) => ({
-        ...prev,
-        [currentDateKey]: [...(prev[currentDateKey] || []), newTask],
-      }));
-      setNewTask("");
+    if (!newTaskContent) {
+      alert("할 일을 입력해주세요.");
+      return;
+    }
+
+    try {
+      const todoId = "1"; // Todo ID는 실제 값으로 대체해야 합니다
+      const response = await axios.post(`/todo/${todoId}/add`, {
+        content: newTaskContent,
+        status: false, // 기본값으로 완료되지 않은 상태
+      });
+
+      if (response.status === 201) {
+        // 새로운 할 일을 로컬 상태에 추가
+        setTasksByDate((prev) => ({
+          ...prev,
+          [currentDateKey]: [
+            ...(prev[currentDateKey] || []),
+            { content: newTaskContent, contentId: Date.now() }, // 임시 ID 생성
+          ],
+        }));
+        setNewTask(""); // 입력 필드 초기화
+      }
+    } catch (error) {
+      console.error("할 일 추가 실패:", error.response || error);
+      alert("할 일을 추가하는 데 실패했습니다.");
     }
   };
 
+  // 할 일 삭제 (로컬 상태 업데이트)
   const deleteTask = (index) => {
     setTasksByDate((prev) => ({
       ...prev,
@@ -48,33 +209,46 @@ const Todolist = ({ selectedDate, userJob }) => {
     }));
   };
 
+  // 수정 시작
   const startEditing = (index) => {
     setIsEditing(index); // 수정 모드로 변경
-    setEditedTask(tasks[index]); // 기존 내용을 수정 상태로 설정
+    setEditedTask(tasks[index].content); // 기존 내용을 수정 상태로 설정
   };
 
-  const saveEditedTask = (index) => {
-    const updatedTasks = [...tasks];
-    updatedTasks[index] = editedTask; // 수정된 내용을 저장
-    setTasksByDate((prev) => ({
-      ...prev,
-      [currentDateKey]: updatedTasks,
-    }));
-    setIsEditing(null); // 수정 모드 종료
-    setEditedTask(""); // 수정 상태 초기화
+  // 수정 저장 (Todo 수정 API 연동)
+  const saveEditedTask = async (index, contentId) => {
+    const updatedTask = editedTask.trim();
+
+    if (!updatedTask) {
+      alert("수정할 내용을 입력해주세요.");
+      return;
+    }
+
+    try {
+      // Todo 수정 API 호출
+      const response = await axios.patch(`/api/todos/${contentId}`, {
+        newContent: updatedTask,
+      });
+
+      if (response.status === 201) {
+        // 상태 업데이트
+        const updatedTasks = [...tasks];
+        updatedTasks[index] = { ...updatedTasks[index], content: updatedTask }; // 수정된 내용 반영
+        setTasksByDate((prev) => ({
+          ...prev,
+          [currentDateKey]: updatedTasks,
+        }));
+        setIsEditing(null); // 수정 모드 종료
+        setEditedTask(""); // 수정 상태 초기화
+      }
+    } catch (error) {
+      console.error("Todo 수정 실패:", error);
+      alert("Todo를 수정하는 데 실패했습니다.");
+    }
   };
 
   return (
     <TodolistContainer>
-      {/* <Title>
-        {new Intl.DateTimeFormat("ko-KR", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        }).format(selectedDate)}
-        의 할 일
-      </Title> */}
-
       <TaskInputContainer>
         <TaskInput
           type="text"
@@ -86,7 +260,7 @@ const Todolist = ({ selectedDate, userJob }) => {
       </TaskInputContainer>
       <TaskList>
         {tasks.map((task, index) => (
-          <TaskItem key={index}>
+          <TaskItem key={task.contentId}>
             <Checkbox type="checkbox" onChange={() => {}} />
             {isEditing === index ? (
               <EditInput
@@ -95,10 +269,10 @@ const Todolist = ({ selectedDate, userJob }) => {
                 onChange={(e) => setEditedTask(e.target.value)}
               />
             ) : (
-              <TaskText>{task}</TaskText>
+              <TaskText>{task.content}</TaskText>
             )}
             {isEditing === index ? (
-              <SaveButton onClick={() => saveEditedTask(index)}>
+              <SaveButton onClick={() => saveEditedTask(index, task.contentId)}>
                 저장
               </SaveButton>
             ) : (
