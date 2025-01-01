@@ -138,6 +138,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { instance } from "./../../api/instance";
 
 const Todolist = ({ selectedDate, userJob }) => {
   const [tasksByDate, setTasksByDate] = useState({}); // 날짜별 할 일 관리
@@ -149,25 +150,33 @@ const Todolist = ({ selectedDate, userJob }) => {
   const currentDateKey = selectedDate.toISOString().split("T")[0]; // YYYY-MM-DD 형식
   const tasks = tasksByDate[currentDateKey] || []; // 선택된 날짜의 할 일 목록
 
-  // Default Todo API를 통해 기본 Todo 가져오기
+  // Default Todo API를 통해 기본 Todo 생성
   useEffect(() => {
-    const fetchDefaultTodos = async () => {
+    const createDefaultTodo = async () => {
       try {
-        const response = await axios.post(`/todo/1`, {
-          date: currentDateKey,
-          job: userJob, // 사용자 직업 전달
-        });
-        setTasksByDate((prev) => ({
-          ...prev,
-          [currentDateKey]: response.data.data, // Default Todos 데이터 업데이트
-        }));
+        const studentId = 1; // 실제 studentId로 대체 필요
+        const response = await instance.post(`/todo/1`);
+
+        if (response.status === 201) {
+          console.log("Default Todo 생성 성공:", response.data);
+          setTasksByDate((prev) => ({
+            ...prev,
+            [currentDateKey]: response.data.data, // Default Todo 데이터 저장
+          }));
+        }
       } catch (error) {
-        console.error("기본 Todo를 불러오는 데 실패했습니다:", error);
+        console.error("Default Todo 생성 실패:", error.response?.data || error);
+        if (error.response?.status === 400) {
+          alert(
+            error.response.data.message ||
+              "Default Todo 생성 중 문제가 발생했습니다."
+          );
+        }
       }
     };
 
-    fetchDefaultTodos();
-  }, [currentDateKey, userJob]);
+    createDefaultTodo();
+  }, [currentDateKey]); // currentDateKey가 변경될 때마다 실행
 
   const addTask = async () => {
     const newTaskContent = newTask.trim();
