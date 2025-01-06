@@ -6,15 +6,15 @@ const Banker = () => {
   const [students, setStudents] = useState([
     {
       id: 1,
-      name: "홍길동",
+      name: "이다빈",
       job: "국세청",
       hasAccount: false,
       depositInfo: null,
     },
     {
       id: 2,
-      name: "김철수",
-      job: "한국전력소",
+      name: "한다현",
+      job: "은행원",
       hasAccount: true,
       depositInfo: { amount: 100000, period: 12, createdAt: new Date() },
     },

@@ -24,7 +24,7 @@ export default CustomCalendar;
 
 const CalendarContainer = styled.div`
   position: relative;
-  width: 17rem; /* 달력 너비 조정 */
+  width: 21rem; /* 달력 너비 조정 */
   height: 10rem;
   max-width: 100%; /* 반응형 대비 */
 `;
@@ -32,7 +32,7 @@ const CalendarContainer = styled.div`
 const StyledCalendar = styled(Calendar)`
   .react-calendar {
     width: 100% !important; /* 전체 달력 너비 맞춤 */
-    font-size: 0.9rem; /* 달력 글자 크기 축소 */
+    font-size: 0.8rem; /* 달력 글자 크기 축소 */
   }
 
   .react-calendar__tile {

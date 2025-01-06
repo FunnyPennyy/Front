@@ -6,7 +6,7 @@ import JobHandler from "../../components/job/JobHandler"; // JobHandler 컴포�
 
 const Todo = () => {
   const [selectedDate, setSelectedDate] = useState(new Date()); // 현재 날짜를 초기값으로 설정
-  const userJob = "은행원"; // 사용자 직업 (예: 은행원, 국세청 등)
+  const userJob = "통계청"; // 사용자 직업 (예: 은행원, 국세청 등)
 
   return (
     <div>
