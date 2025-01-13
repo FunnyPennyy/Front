@@ -7,7 +7,9 @@ import "../../styles/dashboard/chart.css";
 const dashboardComponent = () => {
   return (
     <div class="dashboard-contents">
-      <div class="welcome-box"></div>
+      {/* 
+        <div class="welcome-box"></div>
+      */}
       <div id="dashboard-note">
         <div className="notice-section">
           <div class="notice-header">
