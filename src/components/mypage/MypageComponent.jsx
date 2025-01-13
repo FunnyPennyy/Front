@@ -5,7 +5,9 @@ const mypage = () => {
   return (
     <div className="mypage-container">
       <div className="job-card">
-        <div className="job-image">직업카드(이미지)</div>
+        <div>
+          <img className="job-image" src="/img/mypage/job-elect.png" />
+        </div>
         <div className="job-info">
           <h2 className="job-name">
             김멋사 <button className="edit-button">수정하기</button>
@@ -21,12 +23,15 @@ const mypage = () => {
       </div>
 
       {/* 내 자산 섹션 */}
-      <div className="asset-section">
+      <div class="asset-section">
         <h3>내 자산</h3>
-        <div className="asset-items">
-          <div className="asset-item"></div>
-          <div className="asset-item"></div>
-          <div className="asset-item"></div>
+        <div class="asset-items">
+          <div class="asset-item">
+            <p class="asset-title">💳 통장</p>
+            <p class="asset-balance">
+              잔액 <span>100,000원</span>
+            </p>
+          </div>
         </div>
       </div>
 
@@ -34,9 +39,14 @@ const mypage = () => {
       <div className="certificate-section">
         <h3>내 자격증</h3>
         <div className="certificate-items">
-          <div className="certificate-item"></div>
-          <div className="certificate-item"></div>
-          <div className="certificate-item"></div>
+          <img
+            className="certificate-item"
+            src="/img/mypage/qualifications-1.png"
+          ></img>
+          <img
+            className="certificate-item"
+            src="/img/mypage/qualifications-2.png"
+          ></img>
         </div>
       </div>
     </div>

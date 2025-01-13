@@ -20,7 +20,7 @@
   grid-template-rows: 1fr auto;
   gap: 1.3rem; /* 요소 간 간격 */
 
-  padding-top: 2rem;
+  padding-top: 0.3rem;
   width: 100%;
   height: auto;
 }
